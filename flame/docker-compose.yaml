@@ -1,0 +1,12 @@
+services:
+  flame:
+    image: pawelmalak/flame
+    container_name: flame
+    volumes:
+      - ./data:/app/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 80:5005
+    environment:
+      - PASSWORD=yourpassword
+    restart: unless-stopped

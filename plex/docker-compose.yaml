@@ -1,0 +1,19 @@
+services:
+  plex:
+    image: plexinc/pms-docker
+    container_name: plex
+    network_mode: "host"
+    restart: unless-stopped
+    environment:
+      - TZ=Australia/Melbourne
+      - PLEX_CLAIM=your_plex_claim_token_here
+    volumes:
+      - ./database:/config # Plex metadata & settings
+      - ./transcode/temp:/transcode # Temporary transcoding files
+      - /mnt/music:/volume1/music/
+      - /mnt/Storage-SSD/Media/TV Shows:/volume2/Storage-SSD/Media/TV Shows
+      - /mnt/Storage-SSD/Media/Movies:/volume2/Storage-SSD/Media/Movies
+      - /mnt/Downloads:/volume1/Downloads
+    devices:
+      - /dev/dri:/dev/dri # Required for Intel Quick Sync hardware transcoding
+      - /dev/bus/usb:/dev/bus/usb # passes the USB Coral, needs to be modified for other versions

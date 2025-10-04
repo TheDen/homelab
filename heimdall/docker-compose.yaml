@@ -1,0 +1,13 @@
+services:
+  heimdall:
+    image: linuxserver/heimdall
+    container_name: heimdall
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - /mnt/ssd/heimdall/data:/config
+    ports:
+      - "8000:80"
+      - "8443:443"
+    restart: unless-stopped
